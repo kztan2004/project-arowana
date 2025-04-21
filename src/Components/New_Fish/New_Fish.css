@@ -39,7 +39,7 @@
     margin-bottom: 1.25rem;
 }
 
-label {
+.container label {
     display: block;
     margin-bottom: 0.6rem;
     font-weight: bold;
@@ -47,7 +47,7 @@ label {
     letter-spacing: 0.3px;
 }
 
-input {
+.container input {
     width: 100%;
     padding: 0.9rem;
     border: 2px solid #4fc3f7;
@@ -58,18 +58,18 @@ input {
     transition: all 0.3s ease;
 }
 
-input:focus {
+.container input:focus {
     outline: none;
     border-color: #81d4fa;
     box-shadow: 0 0 12px rgba(79, 195, 247, 0.6);
 }
 
-input::placeholder {
+.container input::placeholder {
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.95rem;
 }
 
-button {
+.container button {
     background-color: #4fc3f7;
     color: #0e2f44;
     border: none;
@@ -83,7 +83,7 @@ button {
     margin-top: 1rem;
 }
 
-button:hover {
+.container button:hover {
     background-color: #81d4fa;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -144,7 +144,7 @@ button:hover {
 
 .fish-skin button:hover,
 .fish-skin button:focus {
-    transform: scale(1.1);
+    transform: scale(1.05);
     border-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -178,11 +178,11 @@ button:hover {
         padding: 2rem;
     }
 
-    input {
+    .container input {
         padding: 0.85rem;
     }
 
-    button {
+    .container button {
         padding: 0.9rem;
     }
 
@@ -207,7 +207,7 @@ button:hover {
         height: 55px;
     }
 
-    button {
+    .container button {
         font-size: 1rem;
     }
 }
@@ -229,7 +229,7 @@ button:hover {
 
 /* Touch device optimizations */
 @media (hover: none) {
-    button:hover {
+    .container button:hover {
         transform: none;
     }
 

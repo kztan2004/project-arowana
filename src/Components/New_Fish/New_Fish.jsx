@@ -151,11 +151,11 @@ const NewFish = () => {
                     />
                 </div>
 
-                <button type="submit">Throw your 龙鱼 into 水池</button>
+                <button className="submit" type="submit">Throw your 龙鱼 into 水池</button>
             </form>
             <div className="nav-btn">
                 <a onClick={() => navigate('/')} className="back-button" style={{ cursor: 'pointer' }}>
-                    ← Back to Aquarium
+                    ←  Back to 水池
                 </a>
                 <a onClick={() => navigate('/credit')} className="credit-button" style={{ cursor: 'pointer' }}>
                     Credit

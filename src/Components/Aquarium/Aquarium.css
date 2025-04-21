@@ -52,6 +52,13 @@
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: 0.7s;
+}
+
+.background-text.active {
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    font-weight: bold;
 }
 
 .fish {
@@ -113,6 +120,25 @@
     background-color: rgba(255, 255, 255, 0.3);
     transform: translateX(-50%) scale(1.05);
     border: 1px solid white;
+}
+
+.music-toggle {
+    position: fixed;
+    top: 4%;
+    right: 4%;
+    padding: 0px;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 30px;
+    transition: 0.3s;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6)
+}
+
+.music-toggle:hover {
+    transform: scale(1.2);
+    color: rgba(255, 255, 255, 0.9)
 }
 
 /* Mobile-specific adjustments */

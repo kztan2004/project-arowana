@@ -1,37 +1,85 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Aquarium.css'; // We'll extract the CSS into a separate file
+import './Aquarium.css';
 import silver_arowana from '../../assets/silver_arowana.png';
 import red_arowana from '../../assets/red_arowana.png';
 import golden_arowana from '../../assets/golden_arowana.png';
 import blue_arowana from '../../assets/blue_arowana.png';
 import rainbow_arowana from '../../assets/rainbow_arowana.png';
 import axios from 'axios';
+import backgroundMusic from '../../music/dazhanhongtu.mp3'; // Import your music file
+import lyrics from './lyrics';
 
 const Aquarium = () => {
     const [fishes, setFishes] = useState([]);
     const aquariumRef = useRef(null);
     const requestRef = useRef();
     const navigate = useNavigate();
+    const [isPlaying, setIsPlaying] = useState(false);
+    const audioRef = useRef(null);
+    const [currentLyric, setCurrentLyric] = useState("水池里面银龙鱼");
 
-    // Default fish data
+    // Initialize audio
+    useEffect(() => {
+        audioRef.current = new Audio(backgroundMusic);
+        audioRef.current.loop = true;
+
+        const updateLyrics = () => {
+            if (audioRef.current && !audioRef.current.paused) {
+                const time = audioRef.current.currentTime;
+                const currentLine = [...lyrics].reverse().find(lyric => time >= lyric.time);
+                if (currentLine) {
+                    setCurrentLyric(currentLine.text);
+                }
+            }
+        };
+
+        const intervalId = setInterval(updateLyrics, 500); // Check every 0.5s
+
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current = null;
+            }
+            clearInterval(intervalId);
+        };
+    }, []);
+
+    const toggleMusic = () => {
+        if (isPlaying) {
+            audioRef.current.pause();
+            setCurrentLyric("水池里面银龙鱼"); // Reset to default
+        } else {
+            audioRef.current.play().catch(error => {
+                console.error("Audio playback failed:", error);
+            });
+        }
+        setIsPlaying(!isPlaying);
+    };
+
+
+    // Default fish data and other existing code...
     const defaultFishData = [
-        { name: "大展宏图", message: "大师亲手提笔字", skin: "rainbow_arowana" },
-        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" }
+        { name: "大展宏图", message: "大师亲手提笔字", skin: "golden_arowana" },
+        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
+        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
+        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
+        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
+        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
+        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
+        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
+        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
     ];
 
     useEffect(() => {
         const fetchFishes = async () => {
             try {
-                // First try to fetch from MongoDB
                 const response = await axios.get("https://project-arowana-server.onrender.com/api/fish");
                 const mongoFishes = response.data.map(fish => ({
                     name: fish.name,
                     message: fish.author ? `${fish.message} (by ${fish.author})` : fish.message,
                     skin: fish.skin || 'silver_arowana'
                 }));
-
-                // Combine with default fishes
                 setFishes([...defaultFishData, ...mongoFishes]);
             } catch (error) {
                 console.error("Failed to fetch fish: ", error);
@@ -41,14 +89,21 @@ const Aquarium = () => {
         fetchFishes();
 
         return () => {
-            // Clean up animation frame on unmount
             cancelAnimationFrame(requestRef.current);
         };
     }, []);
 
     return (
         <div className="aquarium" ref={aquariumRef}>
-            <div className="background-text">水池里面银龙鱼</div>
+            <button
+                className="music-toggle"
+                onClick={toggleMusic}
+            >
+                {isPlaying ? '🔊' : '🔇'}
+            </button>
+            <div className={`background-text ${isPlaying ? 'active' : ''}`}>
+                {currentLyric}
+            </div>
             {fishes.map((fish, index) => (
                 <Fish
                     key={index}
@@ -62,7 +117,6 @@ const Aquarium = () => {
         </div>
     );
 };
-
 const Fish = ({ fishData, aquariumRef }) => {
     const fishRef = useRef(null);
     const nameTagRef = useRef(null);
