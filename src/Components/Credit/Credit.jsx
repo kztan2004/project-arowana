@@ -47,7 +47,7 @@ const Credit = () => {
             </div>
 
             <div className="credit-dark-footer">
-                <a onClick={() => navigate('/aquarium')} className="back-button" style={{ cursor: 'pointer' }}>
+                <a onClick={() => navigate('/')} className="back-button" style={{ cursor: 'pointer' }}>
                     ← 我懂你按错了，按这里回去🐟
                 </a>
                 <a

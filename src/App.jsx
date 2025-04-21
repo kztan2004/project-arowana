@@ -9,7 +9,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Aquarium />} />
-        <Route path="/aquarium" element={<Aquarium />} />
         <Route path="/new-fish" element={<New_Fish />} />
         <Route path="/credit" element={<Credit />} />
       </Routes>
