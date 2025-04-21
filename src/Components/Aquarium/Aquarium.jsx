@@ -18,6 +18,7 @@ const Aquarium = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = useRef(null);
     const [currentLyric, setCurrentLyric] = useState("水池里面银龙鱼");
+    const [loading, setLoading] = useState(true);
 
     // Initialize audio
     useEffect(() => {
@@ -45,19 +46,6 @@ const Aquarium = () => {
         };
     }, []);
 
-    const toggleMusic = () => {
-        if (isPlaying) {
-            audioRef.current.pause();
-            setCurrentLyric("水池里面银龙鱼"); // Reset to default
-        } else {
-            audioRef.current.play().catch(error => {
-                console.error("Audio playback failed:", error);
-            });
-        }
-        setIsPlaying(!isPlaying);
-    };
-
-
     // Default fish data and other existing code...
     const defaultFishData = [
         { name: "大展宏图", message: "大师亲手提笔字", skin: "golden_arowana" },
@@ -83,6 +71,8 @@ const Aquarium = () => {
                 setFishes([...defaultFishData, ...mongoFishes]);
             } catch (error) {
                 console.error("Failed to fetch fish: ", error);
+            } finally {
+                setLoading(false); // <-- Done loading
             }
         };
 
@@ -93,22 +83,22 @@ const Aquarium = () => {
         };
     }, []);
 
+
     return (
         <div className="aquarium" ref={aquariumRef}>
-            <button
-                className="music-toggle"
-                onClick={toggleMusic}
-            >
-                {isPlaying ? '🔊' : '🔇'}
-            </button>
             <div className={`background-text ${isPlaying ? 'active' : ''}`}>
-                {currentLyric}
+                {loading ? '加载中...' : currentLyric}
             </div>
+
             {fishes.map((fish, index) => (
                 <Fish
                     key={index}
                     fishData={fish}
                     aquariumRef={aquariumRef}
+                    audioRef={audioRef}
+                    isPlaying={isPlaying}
+                    setIsPlaying={setIsPlaying}
+                    setCurrentLyric={setCurrentLyric}
                 />
             ))}
             <button className="nav-button" onClick={() => navigate('/new-fish')}>
@@ -117,7 +107,7 @@ const Aquarium = () => {
         </div>
     );
 };
-const Fish = ({ fishData, aquariumRef }) => {
+const Fish = ({ fishData, aquariumRef, audioRef, isPlaying, setIsPlaying, setCurrentLyric }) => {
     const fishRef = useRef(null);
     const nameTagRef = useRef(null);
     const messageTagRef = useRef(null);
@@ -205,6 +195,21 @@ const Fish = ({ fishData, aquariumRef }) => {
     const handleMouseEnter = () => {
         setIsMoving(false);
         setIsHovered(true);
+
+        if (fishData.name === "大展宏图" && audioRef.current) {
+            if (isPlaying) {
+                audioRef.current.pause();
+                setIsPlaying(false);
+                setCurrentLyric("水池里面银龙鱼"); // Reset when paused
+            } else {
+                audioRef.current.play()
+                    .then(() => {
+                        setIsPlaying(true);
+                    })
+                    .catch(err => console.error("Play error:", err));
+            }
+        }
+
     };
 
     const handleMouseLeave = () => {
