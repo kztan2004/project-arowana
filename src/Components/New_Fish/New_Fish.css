@@ -1,0 +1,239 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Outfit", sans-serif;
+}
+
+.root {
+    position: relative;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#0e2f44, #104e6f);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    /* Optimal width for desktop */
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    margin: 20px;
+}
+
+.fish-form {
+    width: 100%;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 0.3px;
+}
+
+input {
+    width: 100%;
+    padding: 0.9rem;
+    border: 2px solid #4fc3f7;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #81d4fa;
+    box-shadow: 0 0 12px rgba(79, 195, 247, 0.6);
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.95rem;
+}
+
+button {
+    background-color: #4fc3f7;
+    color: #0e2f44;
+    border: none;
+    padding: 0.95rem;
+    font-size: 1.1rem;
+    border-radius: 7px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    transition: all 0.3s;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background-color: #81d4fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.back-button {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #4fc3f7;
+    text-decoration: none;
+    font-size: 1.05rem;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.back-button:hover {
+    color: #81d4fa;
+}
+
+.credit-button {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #10689e;
+    text-decoration: underline;
+    font-size: 1.05rem;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.credit-button:hover {
+    color: #81d4fa;
+}
+
+.fish-skin {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.fish-skin button {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.fish-skin button:hover,
+.fish-skin button:focus {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+.fish-image {
+    width: 130px;
+    height: 65px;
+    object-fit: contain;
+    transition: all 0.3s;
+}
+
+.skin-name {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 0.95rem;
+    color: #4fc3f7;
+    font-weight: bold;
+}
+
+.nav-btn {
+    margin-left: 25%;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    gap: 20%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+        padding: 2rem;
+    }
+
+    input {
+        padding: 0.85rem;
+    }
+
+    button {
+        padding: 0.9rem;
+    }
+
+    .fish-image {
+        width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1.75rem;
+        border-radius: 10px;
+    }
+
+    .fish-skin button {
+        width: 44px;
+        height: 44px;
+    }
+
+    .fish-image {
+        width: 110px;
+        height: 55px;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    .fish-skin {
+        gap: 10px;
+    }
+
+    .fish-skin button {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+    button:hover {
+        transform: none;
+    }
+
+    .fish-skin button:hover {
+        transform: none;
+    }
+}

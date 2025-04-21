@@ -1,0 +1,142 @@
+.root {
+    margin: 0;
+    background: #0e2f44;
+    overflow: hidden;
+    position: fixed;
+    min-height: 100vh;
+    /* Changed from height to min-height */
+    z-index: 0;
+}
+
+.aquarium {
+    position: fixed;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #123e58,
+            #15597e,
+            #0a3b52,
+            #1479a8);
+    background-size: 300% 300%;
+    animation: bgGradientAnimation 15s ease infinite;
+    overflow: hidden;
+}
+
+@keyframes bgGradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.background-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(1.5em, 8vw, 6em);
+    /* Responsive font size */
+    color: rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+    z-index: 0;
+    pointer-events: none;
+    font-family: 'Arial', sans-serif;
+    width: 90%;
+    /* Prevent overflow */
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fish {
+    position: absolute;
+    width: 80px;
+    /* Responsive fish size */
+    height: auto;
+    transition: transform 0.4s;
+    z-index: 1;
+}
+
+.fish-hover {
+    transform: scale(1.1);
+    border: 2px solid white;
+}
+
+.flip-horizontal {
+    transform: scaleX(-1);
+}
+
+.name-tag,
+.message-tag {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: clamp(10px, 2vw, 12px);
+    /* Responsive font size */
+    pointer-events: none;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    z-index: 2;
+    max-width: 150px;
+}
+
+.nav-button {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 100;
+    font-size: clamp(10px, 3vw, 16px);
+    /* Responsive font size */
+    transition: all 0.3s ease;
+    width: 10%;
+    /* Changed from fixed width */
+    min-width: 170px;
+    padding: 7px 15px;
+    /* Better touch target */
+}
+
+.nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(-50%) scale(1.05);
+    border: 1px solid white;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+
+    .name-tag,
+    .message-tag {
+        font-size: 10px;
+        max-width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .background-text {
+        font-size: 1.8em;
+        white-space: normal;
+        /* Allow wrapping on very small screens */
+    }
+
+}
+
+/* Orientation-specific adjustments */
+@media (orientation: portrait) {
+    .background-text {
+        font-size: clamp(1.5em, 6vh, 2.5em);
+    }
+}
