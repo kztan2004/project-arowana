@@ -24,7 +24,7 @@ const Aquarium = () => {
         const fetchFishes = async () => {
             try {
                 // First try to fetch from MongoDB
-                const response = await axios.get('http://localhost:5000/api/fish');
+                const response = await axios.get("https://project-arowana-server.onrender.com/api/fish");
                 const mongoFishes = response.data.map(fish => ({
                     name: fish.name,
                     message: fish.author ? `${fish.message} (by ${fish.author})` : fish.message,

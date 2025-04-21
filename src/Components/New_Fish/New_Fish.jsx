@@ -68,7 +68,7 @@ const NewFish = () => {
         };
 
         try {
-            axios.post('http://localhost:5000/api/fish', newFish)
+            axios.post("https://project-arowana-server.onrender.com/api/fish", newFish)
         } catch (error) {
             console.error('Failed posting to MongoDB:', error);
         }

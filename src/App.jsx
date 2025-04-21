@@ -4,7 +4,6 @@ import Aquarium from './Components/Aquarium/Aquarium';
 import New_Fish from './Components/New_Fish/New_Fish';
 import Credit from './Components/Credit/Credit';
 
-
 function App() {
   return (
     <Router>
