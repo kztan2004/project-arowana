@@ -74,7 +74,8 @@
 
 .fish-hover {
     transform: scale(1.1);
-    border: 2px solid white;
+    filter: drop-shadow(0 0 10px white);
+    z-index: 101;
 }
 
 .flip-horizontal {
@@ -86,16 +87,30 @@
     position: absolute;
     background: rgba(0, 0, 0, 0.5);
     color: white;
-    padding: 2px 5px;
-    border-radius: 3px;
+    padding: 4px 8px;
+    border-radius: 4px;
     font-size: clamp(10px, 2vw, 12px);
     pointer-events: none;
-    max-width: 150px;
-    word-wrap: break-word;
-    white-space: normal;
-    /* Allow line break */
+    text-align: center;
     transform: translateX(-50%);
+    display: block;
     z-index: 2;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.name-tag {
+    white-space: nowrap;
+}
+
+.message-tag {
+    min-width: 150px;
+    max-width: 151px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    z-index: 101;
 }
 
 .nav-button {
@@ -109,7 +124,7 @@
     border-radius: 5px;
     cursor: pointer;
     z-index: 100;
-    font-size: clamp(10px, 3vw, 16px);
+    font-size: clamp(10px, 2vw, 12px);
     /* Responsive font size */
     transition: all 0.3s ease;
     width: 10%;
