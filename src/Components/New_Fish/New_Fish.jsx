@@ -122,7 +122,7 @@ const NewFish = () => {
                         onChange={handleInputChange}
                         placeholder="Enter 龙鱼's name"
                         required
-                        maxLength={20}
+                        maxLength={40}
                     />
                 </div>
 
