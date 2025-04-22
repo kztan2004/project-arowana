@@ -151,6 +151,8 @@ const Fish = ({ fishData, aquariumRef, audioRef, isPlaying, setIsPlaying, setCur
                     newAngle = newAngle - (2 * Math.PI);
                 }
                 setAngle(newAngle);
+                newX = Math.min(Math.max(newX, 1), aquariumWidth - 81);
+                newY = Math.min(Math.max(newY, 1), aquariumHeight - 81);
             }
 
             const movingLeft = Math.cos(newAngle) > 0;
@@ -222,7 +224,11 @@ const Fish = ({ fishData, aquariumRef, audioRef, isPlaying, setIsPlaying, setCur
             <img
                 ref={fishRef}
                 src={skinImages[fishData.skin]}
-                className={`fish ${isLeft ? 'flip-horizontal' : ''} ${isHovered ? 'fish-hover' : ''}`}
+                className={`fish 
+                    ${isLeft ? 'flip-horizontal' : ''} 
+                    ${isHovered ? 'fish-hover' : ''} 
+                    ${(fishData.name === "大展宏图" && isPlaying) ? 'fish-dance' : ''}
+                `}
                 style={{
                     left: `${position.x}px`,
                     top: `${position.y}px`,

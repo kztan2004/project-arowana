@@ -79,7 +79,7 @@ const NewFish = () => {
             fishMessage: '',
             fishAuthor: ''
         });
-        navigate('/aquarium');
+        navigate('/');
     };
 
     return (
