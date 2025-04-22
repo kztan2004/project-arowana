@@ -51,7 +51,7 @@ const Credit = () => {
                     ← 我懂你按错了，按这里回去🐟
                 </a>
                 <a
-                    href="https://github.com/kztan2004/your-repo"
+                    href="https://github.com/kztan2004/project-arowana"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="credit-dark-link"

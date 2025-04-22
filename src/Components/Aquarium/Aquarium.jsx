@@ -57,7 +57,7 @@ const Aquarium = () => {
                 }));
                 setFishes([
                     { name: "大展宏图", message: "大师亲手提笔字", skin: "golden_arowana" },
-                    ...Array(5).fill({ name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" }),
+                    ...Array(4).fill({ name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" }),
                     ...mongoFishes
                 ]);
             } catch (error) {
@@ -74,7 +74,7 @@ const Aquarium = () => {
     return (
         <div className="aquarium" ref={aquariumRef}>
             <div className={`background-text ${isPlaying ? 'active' : ''}`}>
-                {loading ? '加载中...' : currentLyric}
+                {loading ? '你没有卡住，正在加载中...' : currentLyric}
             </div>
 
             {fishes.map((fish, index) => (
