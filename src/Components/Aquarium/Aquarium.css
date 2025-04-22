@@ -4,7 +4,6 @@
     overflow: hidden;
     position: fixed;
     min-height: 100vh;
-    /* Changed from height to min-height */
     z-index: 0;
 }
 
@@ -12,10 +11,7 @@
     position: fixed;
     min-width: 100vw;
     min-height: 100vh;
-    background: linear-gradient(45deg, #123e58,
-            #15597e,
-            #0a3b52,
-            #1479a8);
+    background: linear-gradient(45deg, #123e58, #15597e, #0a3b52, #1479a8);
     background-size: 300% 300%;
     animation: bgGradientAnimation 15s ease infinite;
     overflow: hidden;
@@ -41,14 +37,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: clamp(1.5em, 8vw, 6em);
-    /* Responsive font size */
     color: rgba(255, 255, 255, 0.1);
     white-space: nowrap;
     z-index: 0;
     pointer-events: none;
     font-family: 'Arial', sans-serif;
     width: 90%;
-    /* Prevent overflow */
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -65,7 +59,6 @@
 .fish {
     position: absolute;
     width: 80px;
-    /* Responsive fish size */
     height: auto;
     transition: transform 0.4s;
     z-index: 1;
@@ -107,9 +100,6 @@
 .message-tag {
     min-width: 150px;
     max-width: 151px;
-    word-break: break-word;
-    overflow-wrap: anywhere;
-    white-space: normal;
     z-index: 101;
 }
 
@@ -125,13 +115,10 @@
     cursor: pointer;
     z-index: 100;
     font-size: clamp(10px, 2vw, 12px);
-    /* Responsive font size */
     transition: all 0.3s ease;
     width: 10%;
-    /* Changed from fixed width */
     min-width: 170px;
     padding: 7px 15px;
-    /* Better touch target */
 }
 
 .nav-button:hover {
@@ -172,11 +159,9 @@
     .background-text {
         font-size: 1.8em;
         white-space: normal;
-        /* Allow wrapping on very small screens */
     }
 }
 
-/* Orientation-specific adjustments */
 @media (orientation: portrait) {
     .background-text {
         font-size: clamp(1.5em, 6vh, 2.5em);

@@ -7,8 +7,8 @@ import golden_arowana from '../../assets/golden_arowana.png';
 import blue_arowana from '../../assets/blue_arowana.png';
 import rainbow_arowana from '../../assets/rainbow_arowana.png';
 import axios from 'axios';
-import backgroundMusic from '../../music/dazhanhongtu.mp3'; // Import your music file
-import lyrics from './lyrics';
+import backgroundMusic from '../../music/dazhanhongtu.mp3';
+import lyrics from '../../assets/lyrics';
 
 const Aquarium = () => {
     const [fishes, setFishes] = useState([]);
@@ -35,7 +35,7 @@ const Aquarium = () => {
             }
         };
 
-        const intervalId = setInterval(updateLyrics, 500); // Check every 0.5s
+        const intervalId = setInterval(updateLyrics, 500);
 
         return () => {
             if (audioRef.current) {
@@ -46,19 +46,6 @@ const Aquarium = () => {
         };
     }, []);
 
-    // Default fish data and other existing code...
-    const defaultFishData = [
-        { name: "大展宏图", message: "大师亲手提笔字", skin: "golden_arowana" },
-        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
-        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
-        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
-        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
-        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
-        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
-        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
-        { name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" },
-    ];
-
     useEffect(() => {
         const fetchFishes = async () => {
             try {
@@ -68,19 +55,19 @@ const Aquarium = () => {
                     message: fish.author ? `${fish.message} (by ${fish.author})` : fish.message,
                     skin: fish.skin || 'silver_arowana'
                 }));
-                setFishes([...defaultFishData, ...mongoFishes]);
+                setFishes([
+                    { name: "大展宏图", message: "大师亲手提笔字", skin: "golden_arowana" },
+                    ...Array(5).fill({ name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" }),
+                    ...mongoFishes
+                ]);
             } catch (error) {
                 console.error("Failed to fetch fish: ", error);
             } finally {
-                setLoading(false); // <-- Done loading
+                setLoading(false);
             }
         };
 
         fetchFishes();
-
-        return () => {
-            cancelAnimationFrame(requestRef.current);
-        };
     }, []);
 
 
@@ -162,6 +149,11 @@ const Fish = ({ fishData, aquariumRef, audioRef, isPlaying, setIsPlaying, setCur
 
             setPosition({ x: newX, y: newY });
 
+            if (fishRef.current) {
+                fishRef.current.style.left = `${newX}px`;
+                fishRef.current.style.top = `${newY}px`;
+            }
+
             // Update tags position
             if (nameTagRef.current && messageTagRef.current) {
                 nameTagRef.current.style.left = `${newX + 40}px`;
@@ -211,7 +203,6 @@ const Fish = ({ fishData, aquariumRef, audioRef, isPlaying, setIsPlaying, setCur
                     .catch(err => console.error("Play error:", err));
             }
         }
-
     };
 
     const handleMouseLeave = () => {
@@ -229,10 +220,6 @@ const Fish = ({ fishData, aquariumRef, audioRef, isPlaying, setIsPlaying, setCur
                     ${isHovered ? 'fish-hover' : ''} 
                     ${(fishData.name === "大展宏图" && isPlaying) ? 'fish-dance' : ''}
                 `}
-                style={{
-                    left: `${position.x}px`,
-                    top: `${position.y}px`,
-                }}
                 alt={fishData.name}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
@@ -240,10 +227,6 @@ const Fish = ({ fishData, aquariumRef, audioRef, isPlaying, setIsPlaying, setCur
             <div
                 ref={nameTagRef}
                 className="name-tag"
-                style={{
-                    left: `${position.x + 40}px`,
-                    top: `${position.y - 20}px`,
-                }}
             >
                 {fishData.name}
             </div>
@@ -251,8 +234,6 @@ const Fish = ({ fishData, aquariumRef, audioRef, isPlaying, setIsPlaying, setCur
                 ref={messageTagRef}
                 className="message-tag"
                 style={{
-                    left: `${position.x + 40}px`,
-                    top: `${position.y + 55}px`,
                     display: isHovered ? 'block' : 'none',
                 }}
             >
@@ -269,8 +250,7 @@ function randomAngle() {
         [150, 210]
     ];
     const [min, max] = degRanges[Math.floor(Math.random() * degRanges.length)];
-    const angleDeg = min + Math.random() * (max - min);
-    return angleDeg * (Math.PI / 180);
+    return (min + Math.random() * (max - min)) * (Math.PI / 180);
 }
 
 export default Aquarium;
