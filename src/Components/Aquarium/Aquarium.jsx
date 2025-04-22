@@ -56,8 +56,8 @@ const Aquarium = () => {
                     skin: fish.skin || 'silver_arowana'
                 }));
                 setFishes([
-                    { name: "大展宏图", message: "大师亲手提笔字", skin: "golden_arowana" },
-                    ...Array(4).fill({ name: "银龙鱼", message: "一条银龙鱼", skin: "silver_arowana" }),
+                    { name: "大展宏图", message: "恭喜你发现了彩蛋🎵", skin: "golden_arowana" },
+                    ...Array(4).fill({ name: "银龙鱼", message: "只是一条银龙鱼", skin: "silver_arowana" }),
                     ...mongoFishes
                 ]);
             } catch (error) {
