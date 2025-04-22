@@ -168,23 +168,12 @@
     z-index: 101;
 }
 
-/* Mobile-specific adjustments */
-@media (max-width: 768px) {
-
-    .name-tag,
-    .message-tag {
-        font-size: 10px;
-        max-width: 100px;
-    }
-}
-
 @media (max-width: 480px) {
     .background-text {
         font-size: 1.8em;
         white-space: normal;
         /* Allow wrapping on very small screens */
     }
-
 }
 
 /* Orientation-specific adjustments */

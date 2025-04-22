@@ -136,8 +136,8 @@ const Fish = ({ fishData, aquariumRef, audioRef, isPlaying, setIsPlaying, setCur
             if (!isMoving || !aquariumRef.current) return;
 
             // Calculate new position
-            const newX = position.x + Math.cos(angle) * speed;
-            const newY = position.y + Math.sin(angle) * speed;
+            let newX = position.x + Math.cos(angle) * speed;
+            let newY = position.y + Math.sin(angle) * speed;
 
             const aquariumWidth = window.innerWidth;
             const aquariumHeight = window.innerHeight;
